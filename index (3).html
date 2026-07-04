@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f4ee" />
+  <title>Casa de Lagos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+</head>
+<body>
+
+  <!-- ===================== ECRÃ DE PERFIL ===================== -->
+  <section id="profile-screen" class="profile-screen">
+    <div class="profile-inner">
+      <h1 class="serif profile-title" id="ps-title">Casa de Lagos</h1>
+      <p class="profile-sub">Quem está a usar?</p>
+      <div id="profile-grid" class="profile-grid"><!-- avatares injetados por JS --></div>
+    </div>
+  </section>
+
+  <!-- ===================== APLICAÇÃO ===================== -->
+  <div id="app" class="app hidden">
+    <header class="site-header">
+      <button id="menu-btn" class="menu-btn" type="button" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="site-header-inner">
+        <h1 class="serif site-title" id="house-name">Casa de Lagos</h1>
+        <p class="site-sub" id="house-sub">A nossa casa, da nossa família.</p>
+        <p class="site-tagline"><span class="heart">♡</span><span id="house-tagline">Casa dos Avós</span></p>
+      </div>
+
+      <!-- Menu -->
+      <div id="menu-panel" class="menu-panel hidden">
+        <div class="menu-profile">
+          <span class="avatar" id="menu-avatar"></span>
+          <div class="menu-profile-text">
+            <span class="menu-profile-label">A usar como</span>
+            <span class="menu-profile-name" id="menu-name"></span>
+          </div>
+        </div>
+        <button id="switch-profile" class="menu-item" type="button">Trocar de perfil</button>
+      </div>
+    </header>
+
+    <div class="hero" id="hero"></div>
+
+    <main class="content">
+      <section class="cal-head">
+        <h2 class="serif">Calendário de Reservas</h2>
+        <p class="cal-sub">Vê quando a casa está reservada e faz o teu pedido.</p>
+      </section>
+
+      <div class="cal-toolbar">
+        <button id="prev-month" class="nav-btn" type="button" aria-label="Mês anterior">‹</button>
+        <button id="month-label-btn" class="month-label-btn" type="button">
+          <span id="month-label"></span><span class="chev">⌄</span>
+        </button>
+        <button id="next-month" class="nav-btn" type="button" aria-label="Mês seguinte">›</button>
+
+        <!-- Seletor de mês -->
+        <div id="month-picker" class="month-picker hidden">
+          <div class="mp-year">
+            <button type="button" class="mp-year-btn" data-yr="-1" aria-label="Ano anterior">‹</button>
+            <span id="mp-year-label"></span>
+            <button type="button" class="mp-year-btn" data-yr="1" aria-label="Ano seguinte">›</button>
+          </div>
+          <div id="mp-months" class="mp-months"></div>
+        </div>
+      </div>
+
+      <div class="calendar" id="calendar">
+        <div class="weekdays">
+          <span>SEG</span><span>TER</span><span>QUA</span>
+          <span>QUI</span><span>SEX</span><span>SÁB</span><span>DOM</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"><!-- dias injetados --></div>
+      </div>
+
+      <div id="legend" class="legend"><!-- legenda injetada --></div>
+
+      <button id="new-booking-btn" class="cta-btn" type="button">
+        <span class="cta-plus">＋</span> Fazer pedido de reserva
+      </button>
+      <p class="cal-foot">Os pedidos são visíveis apenas para a família.</p>
+    </main>
+  </div>
+
+  <!-- ===================== MODAL: RESERVA (novo/editar) ===================== -->
+  <div id="booking-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-head">
+        <h3 id="booking-modal-title" class="serif">Nova reserva</h3>
+        <button class="modal-close" data-close type="button" aria-label="Fechar">✕</button>
+      </header>
+      <form id="booking-form" class="modal-body">
+        <input type="hidden" id="booking-id" />
+        <label class="field">
+          <span>Reservado por</span>
+          <input id="booking-person" type="text" readonly />
+        </label>
+        <div class="field-row">
+          <label class="field">
+            <span>Chegada</span>
+            <input id="booking-start" type="date" required />
+          </label>
+          <label class="field">
+            <span>Saída</span>
+            <input id="booking-end" type="date" required />
+          </label>
+        </div>
+        <label class="field">
+          <span>Nº de hóspedes</span>
+          <input id="booking-guests" type="number" min="1" value="1" required />
+        </label>
+
+        <div id="conflict-warning" class="conflict-warning hidden"></div>
+
+        <footer class="modal-actions">
+          <button type="button" id="delete-booking" class="btn btn-danger hidden">Cancelar reserva</button>
+          <div class="spacer"></div>
+          <button type="button" class="btn btn-ghost" data-close>Fechar</button>
+          <button type="submit" class="btn btn-primary" id="save-booking">Guardar</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: DETALHES ===================== -->
+  <div id="details-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-head">
+        <h3 id="details-title" class="serif">Detalhes da reserva</h3>
+        <button class="modal-close" data-close type="button" aria-label="Fechar">✕</button>
+      </header>
+      <div class="modal-body" id="details-body"><!-- injetado --></div>
+      <footer class="modal-actions">
+        <div class="spacer"></div>
+        <button type="button" class="btn btn-ghost" data-close>Fechar</button>
+        <button type="button" class="btn btn-primary" id="edit-from-details">Editar</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ===================== TOAST ===================== -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
