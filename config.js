@@ -7,8 +7,8 @@
 // NUNCA coloques aqui a chave "service_role".
 // ============================================================================
 
-const SUPABASE_URL = "https://YOUR_PROJECT.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+const SUPABASE_URL = "https://mxcjeiwvrthnlrcuwuob.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_nM_S5ekCnQm2ewkYlG4V8A_R1mn7ffk";
 
 // ---------------------------------------------------------------------------
 // Textos do cabeçalho — editar à vontade.
