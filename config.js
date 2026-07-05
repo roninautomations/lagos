@@ -20,7 +20,7 @@ const HOUSE_TAGLINE = "Casa dos Avós";
 // Imagem do banner (opcional). Deixa vazio ("") para usar o degradê de praia
 // incluído. Podes pôr um URL público (ex.: uma foto no Supabase Storage) ou
 // um ficheiro local (ex.: "assets/lagos.jpg").
-const HERO_IMAGE_URL = "";
+const HERO_IMAGE_URL = "praia.png";
 
 // ---------------------------------------------------------------------------
 // Perfis (famílias ou pessoas) — editar aqui.
