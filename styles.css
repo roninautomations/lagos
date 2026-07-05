@@ -189,6 +189,7 @@ body {
    HERO
    ============================================================ */
 .hero {
+  position: relative;
   width: 100%;
   height: clamp(180px, 42vw, 340px);
   background-size: cover;
@@ -198,6 +199,14 @@ body {
     180deg,
     #cfe8f0 0%, #a6d4e2 34%, #63aec4 58%,
     #3f93ab 68%, #ecd9ab 68.5%, #f1e3bc 100%);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
 }
 
 /* ============================================================
