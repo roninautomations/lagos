@@ -27,14 +27,14 @@ const HERO_IMAGE_URL = "";
 // Cada nome recebe automaticamente uma cor e um avatar com as iniciais.
 // ---------------------------------------------------------------------------
 const FAMILY_MEMBERS = [
-  "Família Sousa",
-  "Família Almeida",
-  "Família Costa",
-  "Família Ferreira",
-  "Família Martins",
-  "Família Rodrigues",
-  "Família Pereira",
-  "Família Oliveira",
-  "Família Gomes",
-  "Família Lopes",
+  "Tia Xana",
+  "Tio Miguel",
+  "Tia Susana",
+  "Maria",
+  "Francisco",
+  "João",
+  "Manel",
+  "Zé",
+  "Nonô",
+  "Nuno",
 ];
